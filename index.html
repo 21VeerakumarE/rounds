@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Rounds · daily clinical reasoning</title>
+    <meta name="description" content="Rounds is a daily clinical-reasoning game for medical students: work up the patient against the clock and name the diagnosis. Step 1 cardiology and pulmonology cases.">
+    <!-- Link previews (iMessage, WhatsApp, Slack, X). Crawlers need absolute URLs, so these name
+         the public site; scripts/check-dist.ts fails the build if og:image/twitter:image drift. -->
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Rounds">
+    <meta property="og:title" content="Rounds">
+    <meta property="og:description" content="Take the history. Make the call. A daily clinical reasoning case for med students.">
+    <meta property="og:url" content="https://21veerakumare.github.io/rounds/">
+    <meta property="og:image" content="https://21veerakumare.github.io/rounds/og.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="Rounds: a bedside-monitor ECG trace under the tagline Take the history. Make the call.">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Rounds">
+    <meta name="twitter:description" content="Take the history. Make the call. A daily clinical reasoning case for med students.">
+    <meta name="twitter:image" content="https://21veerakumare.github.io/rounds/og.png">
+    <link rel="manifest" href="./manifest.webmanifest">
+    <!-- m-5: the phone status bar / installed-app title bar follows the theme: scrub teal in light,
+         the dark topbar surface in dark. An explicit in-app choice overrides both (the script below
+         on first paint, then src/ui/themeColor.ts). -->
+    <meta name="theme-color" media="(prefers-color-scheme: light)" content="#0a6c7d">
+    <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#141b21">
+    <link rel="icon" href="./icon.svg" type="image/svg+xml">
+    <link rel="apple-touch-icon" href="./icon-192.png">
+    <script>
+      // Applies a saved light/dark theme before first paint, so a reload never flashes the
+      // wrong theme. 'system' (or no saved setting) leaves the attribute unset, matching
+      // prefers-color-scheme via CSS; the React effect in App.tsx re-applies this on later
+      // theme changes. Keep the key in sync with SETTINGS_KEY in src/storage/settings.ts.
+      try {
+        var raw = localStorage.getItem('crg.settings.v1');
+        var s = raw ? JSON.parse(raw) : null;
+        if (s && (s.theme === 'light' || s.theme === 'dark')) {
+          document.documentElement.dataset.theme = s.theme;
+          // Keep in sync with THEME_COLOR in src/ui/themeColor.ts.
+          var tc = s.theme === 'dark' ? '#141b21' : '#0a6c7d';
+          document.querySelectorAll('meta[name="theme-color"]').forEach(function (m) { m.setAttribute('content', tc); });
+        }
+      } catch (e) { /* storage unavailable or garbage: fall back to prefers-color-scheme */ }
+    </script>
+    <script type="module" crossorigin src="./assets/index-C0wkDRXk.js"></script>
+    <link rel="stylesheet" crossorigin href="./assets/index-bGOer7EI.css">
+  </head>
+  <body>
+    <div id="root"></div>
+  </body>
+</html>
